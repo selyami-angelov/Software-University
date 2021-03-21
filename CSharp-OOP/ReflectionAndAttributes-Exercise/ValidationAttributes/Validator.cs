@@ -1,9 +1,5 @@
-﻿
-
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ValidationAttributes
 {
@@ -15,12 +11,20 @@ namespace ValidationAttributes
 
             foreach (var prop in props)
             {
+                var curAttributes = prop.GetCustomAttributes().Where(x => x is MyValidationAttribute);
 
-                foreach (MyValidationAttribute attribute in prop.GetCustomAttributes().Where(x => x.GetType() == typeof(MyValidationAttribute)).ToArray())
+                foreach (MyValidationAttribute atr in curAttributes)
                 {
-                    return attribute.IsValid()
+                    bool result = atr.IsValid(prop.GetValue(obj));
+
+                    if (!result)
+                    {
+                        return false;
+                    }
                 }
             }
+
+            return true;
             
             
         }
