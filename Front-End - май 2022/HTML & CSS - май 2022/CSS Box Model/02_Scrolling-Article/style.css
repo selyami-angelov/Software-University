@@ -1,0 +1,20 @@
+section article{
+    width: 500px;
+    height: 200px;
+    background-color: lightgray;
+    padding: 10px;
+    overflow: auto;
+}
+
+section article h2{
+    text-transform: uppercase;
+    text-align: center;
+}
+
+section article h3{
+    text-align: center;
+}
+
+section article p{
+    text-indent: 30px;
+}
